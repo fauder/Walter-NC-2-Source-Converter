@@ -1,0 +1,83 @@
+buffer.clear();
+
+// Initial Setup.
+format_to( buffer, "N{:d} G90 G17\n", lineNumber++ );
+format_to( buffer, "N{:d} S1426 M3\n", lineNumber++ );
+format_to( buffer, "N{:d} G01 X{x:.3f} Y{y:.3f} Z{z:.3f} F1000\n", lineNumber++,
+           arg( "x", cutterPosition.x() ), arg( "y", cutterPosition.y() ), arg( "z", cutterPosition.z() ) );
+format_to( buffer, "N{:d} G91\n", lineNumber++ );
+
+// Pass #1.
+format_to( buffer, "N{:d} G01 Z-102.200 F1000\n", lineNumber++ );
+format_to( buffer, "N{:d} G41 D{toolNo:d} G01 X0.000 Y26.000 F2943\n", lineNumber++,
+           arg( "toolNo", toolNo ) );
+format_to( buffer, "N{:d} G03 X0.000 Y-65.160 Z1.000 I0.000 J-32.580 F594\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160 F692\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.160\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y65.160 Z1.000 I0.000 J32.580\n", lineNumber++ );
+format_to( buffer, "N{:d} G40 G01 X0.000 Y-26.000\n", lineNumber++ );
+
+// Pass #2.
+format_to( buffer, "N{:d} G00 Z-62.000 F1000\n", lineNumber++ );
+format_to( buffer, "N{:d} G41 D{toolNo:d} G01 X0.000 Y26.000 F2943\n", lineNumber++,
+           arg( "toolNo", toolNo ) );
+format_to( buffer, "N{:d} G03 X0.000 Y-65.640 Z1.000 I0.000 J-32.820 F612\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640 F709\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J39.640\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y65.640 Z1.000 I0.000 J32.820\n", lineNumber++ );
+format_to( buffer, "N{:d} G40 G01 X0.000 Y-26.000\n", lineNumber++ );
+
+// Pass #3.
+format_to( buffer, "N{:d} G00 Z-62.000 F1000\n", lineNumber++ );
+format_to( buffer, "N{:d} G41 D{toolNo:d} G01 X0.000 Y26.000 F2943\n", lineNumber++,
+           arg( "toolNo", toolNo ) );
+format_to( buffer, "N{:d} G03 X0.000 Y-66.000 Z1.000 I0.000 J-33.000 F624\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000 F721\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y0.000 Z4.000 I0.000 J40.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G03 X0.000 Y66.000 Z1.000 I0.000 J33.000\n", lineNumber++ );
+format_to( buffer, "N{:d} G40 G01 X0.000 Y-26.000\n", lineNumber++ );
+
+// Return tool to initial position.
+format_to( buffer, "N{:d} G00 G90 X{x:.3f} Y{y:.3f} Z{z:.3f}\n", lineNumber++,
+           arg( "x", cutterPosition.x() ), arg( "y", cutterPosition.y() ), arg( "z", cutterPosition.z() ) );
+
+return std::string_view( buffer.data(), buffer.size() );
