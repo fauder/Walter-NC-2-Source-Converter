@@ -1,23 +1,25 @@
-// std Includes.
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-
 // Corrade Includes.
+#include <Corrade/Containers/Optional.h>
 #include <Corrade/Containers/StaticArray.h>
 #include <Corrade/Utility/Directory.h>
 #include <Corrade/Utility/String.h>
 
+// std Includes.
+#include <iostream>
+#include <filesystem>
+#include <fstream>
+#include <sstream>
+#include <string>
+
 namespace Dir = Corrade::Utility::Directory;
 namespace Str = Corrade::Utility::String;
 
-void ParseAndProcessFile( std::string fileName )
+Corrade::Containers::Optional< std::string > ParseAndProcessFile( const std::string& filePath, const std::string& outputDirectoryPath )
 {
 	std::stringstream outputStream;
 	outputStream << "buffer.clear();" << "\n\n// Initial Setup.\n";
 
-	std::stringstream fileStream( Dir::readString( fileName ) );
+	std::stringstream fileStream( Dir::readString( filePath ) );
 	std::string line;
 	int currentPassNumber = 1;
 	std::streampos lastLineStartPos = 0;
@@ -107,19 +109,44 @@ void ParseAndProcessFile( std::string fileName )
 
 	outputStream << "\n\n" << "return std::string_view( buffer.data(), buffer.size() );";
 
-	std::ofstream outputFile( "output.txt" );
+	if( !Dir::isDirectory( outputDirectoryPath ) && !Dir::mkpath( outputDirectoryPath ) )
+		return Corrade::Containers::NullOpt;
 
-	outputFile << outputStream.str();
+	std::string outputFileName( outputDirectoryPath + Dir::splitExtension( Dir::filename( Dir::fromNativeSeparators( filePath ) ) ).first + "_WalterSource.txt" );
+	if( std::ofstream outputFile( outputFileName ); outputFile )
+	{
+		outputFile << outputStream.str();
+		return outputFileName;
+	}
+
+	return Corrade::Containers::NullOpt;
 }
 
-int main()
+int main( int argc, char** argv )
 {
-	// TODO: Implement user choosing a directory of txt files.
-	
-	// TODO: Iterate through txt files in folder.
+	std::string directory;
+	if( argc == 1 )
+		directory = Dir::current();
+	else if( argc >= 2 )
+		directory = Dir::fromNativeSeparators( argv[ 1 ] );
+
+	int numberOfProcessed = 0;
+	for( const auto& fileName : Dir::list( directory, Dir::Flag::SkipDirectories ) )
 	{
-		ParseAndProcessFile( "ExampleM80Input.txt" );
+		std::cout << R"(File ")" << fileName << R"(" found in directory.)" << "\n";
+		const auto filePath = directory + fileName;
+		if( auto [ filePathWithoutExtension, extension ] = Dir::splitExtension( filePath ); extension == ".txt" )
+		{
+			if( auto result = ParseAndProcessFile( filePath, directory + "Source/" ); result )
+			{
+				std::cout << R"(File ")" << Dir::toNativeSeparators( *result ) << R"(" is generated.)" << "\n";
+				numberOfProcessed++;
+			}
+		}
 	}
+
+	if( numberOfProcessed == 0 )
+		std::cerr << R"(Directory ")" << directory << R"(" does not contain any files with .txt extension.)" << "\n";
 
 	return 0;
 }
