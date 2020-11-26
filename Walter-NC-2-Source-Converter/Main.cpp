@@ -62,7 +62,7 @@ Corrade::Containers::Optional< std::string > ParseAndProcessFile( const std::str
 		else if( const auto result = Str::rpartition( line, "G41 D.." ); !result.front().empty() )
 		{
 			auto restOfLine = result.back();
-			if( restOfLine.back() == '\r' )
+			while( restOfLine.back() == '\r' ) // While loop because there may be empty lines between actual G code lines...
 				restOfLine.pop_back();
 			outputStream << R"( G41 D{toolNo:d})" << restOfLine;
 			arguments.push_back( R"(arg( "toolNo", toolNo ))" );
@@ -70,7 +70,7 @@ Corrade::Containers::Optional< std::string > ParseAndProcessFile( const std::str
 		else
 		{
 			std::getline( lineStream, line ); // Read the REST of the line into line.
-			if( line.back() == '\r' )
+			while( line.back() == '\r' ) // While loop because there may be empty lines between actual G code lines...
 				line.pop_back();
 			outputStream << line;
 
@@ -126,7 +126,7 @@ int main( int argc, char** argv )
 {
 	std::string directory;
 	if( argc == 1 )
-		directory = Dir::current();
+		directory = Dir::current() + '/';
 	else if( argc >= 2 )
 		directory = Dir::fromNativeSeparators( argv[ 1 ] );
 
